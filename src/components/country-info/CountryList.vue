@@ -1,7 +1,6 @@
 <template>
   <div>
     <sc-input v-model="textInput" placeholder="input" />
-    {{ textInput }}
     <div class="text-xl">CountriesList</div>
 
     <div v-if="isLoading">Loading...</div>
@@ -17,7 +16,7 @@ import { computed, ref } from "vue";
 import {
   CountryList,
   useGetCountriesQuery,
-} from "../../use/usegetCountriesQuery";
+} from "../../use/useGetCountriesQuery";
 import ScInput from "../shared/ScInput.vue";
 
 const { countryList, isLoading } = useGetCountriesQuery();

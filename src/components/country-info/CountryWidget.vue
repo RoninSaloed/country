@@ -1,21 +1,29 @@
 <template>
   <div>
-    <div class="text-xl text-center">Countries Widget</div>
-
     <div v-if="isLoading">Loading...</div>
     <div v-else>
-      <div v-for="(country, idx) of countryList" :key="idx" class="py-3">
-        <div class="border w-60 text-center py-2">{{ country.value }}</div>
+      <div class="py-3">
+        <div class="border w-60 text-center py-2">
+          <div>{{ countryCode.value }}</div>
+          <div>{{ countryListHolidays[0].name }}</div>
+          <div>{{ countryListHolidays[0].date }}</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import {
-  CountryList,
-  useGetCountriesQuery,
-} from "../../use/usegetCountriesQuery";
+import { CountryList } from "../../use/useGetCountriesQuery";
+import { useGetCountryHolidaysQuery } from "../../use/useGetCountryHoliday";
 
-const { countryList, isLoading } = useGetCountriesQuery();
+interface CountriesWidget {
+  number: number;
+  countryList: CountryList[];
+}
+const props = defineProps<CountriesWidget>();
+
+const countryCode = props.countryList[props.number];
+const { countryListHolidays, isLoading } = useGetCountryHolidaysQuery(
+  countryCode.key
+);
 </script>

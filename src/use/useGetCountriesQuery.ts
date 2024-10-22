@@ -1,4 +1,4 @@
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import country from "../api/country";
 export interface CountryList {
   key: string;
@@ -18,7 +18,7 @@ export const useGetCountriesQuery = () => {
       isLoading.value = false;
     }
   };
-  onMounted(countries());
+  countries();
 
   return {
     countryList,
