@@ -1,5 +1,10 @@
 <template>
-  <input type="text" :placeholder="placeholder" v-model="modelValue" />
+  <input
+    type="text"
+    class="border border-black"
+    :placeholder="placeholder"
+    v-model="modelValue"
+  />
 </template>
 
 <script setup lang="ts">
