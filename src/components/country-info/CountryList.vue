@@ -6,7 +6,16 @@
     <div v-if="isLoading">Loading...</div>
     <div v-else>
       <div v-for="(country, idx) of searchCountries" :key="idx" class="py-3">
-        <div class="border w-60 text-center py-2">{{ country.value }}</div>
+        <router-link
+          @click="selectCountry(country)"
+          :to="{ name: Routes.N_Holidays }"
+        >
+          <a href="#"
+            ><div class="border w-60 text-center py-2">
+              {{ country.value }}
+            </div></a
+          >
+        </router-link>
       </div>
     </div>
   </div>
@@ -18,6 +27,9 @@ import {
   useGetCountriesQuery,
 } from "../../use/useGetCountriesQuery";
 import ScInput from "../shared/ScInput.vue";
+import { Routes } from "../../router";
+import { useCountryStore } from "../../stores/application.store";
+const countryStore = useCountryStore();
 
 const { countryList, isLoading } = useGetCountriesQuery();
 const textInput = ref<string>("");
@@ -30,4 +42,8 @@ const searchCountries = computed<CountryList[]>(() => {
   }
   return countryList.value;
 });
+
+const selectCountry = (country: CountryList) => {
+  countryStore.setCountry(country);
+};
 </script>

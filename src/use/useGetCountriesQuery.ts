@@ -8,7 +8,7 @@ export const useGetCountriesQuery = () => {
   const countryList = ref<CountryList[]>([]);
   const isLoading = ref<boolean>(true);
 
-  const countries = async () => {
+  const getCountries = async () => {
     try {
       const data = await country.getAllCountries();
       countryList.value = data;
@@ -18,7 +18,7 @@ export const useGetCountriesQuery = () => {
       isLoading.value = false;
     }
   };
-  countries();
+  getCountries();
 
   return {
     countryList,
