@@ -7,8 +7,10 @@
     <div v-else>
       <div v-for="(country, idx) of searchCountries" :key="idx" class="py-3">
         <router-link
-          @click="selectCountry(country)"
-          :to="{ name: Routes.N_Holidays }"
+          :to="{
+            name: Routes.N_Holidays,
+            query: { code: country.key, country: country.value },
+          }"
         >
           <a href="#"
             ><div class="border w-60 text-center py-2">
@@ -28,8 +30,6 @@ import {
 } from "../../use/useGetCountriesQuery";
 import ScInput from "../shared/ScInput.vue";
 import { Routes } from "../../router";
-import { useCountryStore } from "../../stores/application.store";
-const countryStore = useCountryStore();
 
 const { countryList, isLoading } = useGetCountriesQuery();
 const textInput = ref<string>("");
@@ -42,8 +42,4 @@ const searchCountries = computed<CountryList[]>(() => {
   }
   return countryList.value;
 });
-
-const selectCountry = (country: CountryList) => {
-  countryStore.setCountry(country);
-};
 </script>

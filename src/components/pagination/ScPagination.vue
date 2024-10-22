@@ -1,13 +1,15 @@
 <template>
   <div v-for="(year, idx) of paginationConfig" :key="idx">
-    <span
+    <div
+      class="mr-2"
       @click="selectYear(year)"
       :class="{
         'border-2': year === currentPage,
         'border-0': year !== currentPage,
       }"
-      >{{ year }}</span
     >
+      {{ year }}
+    </div>
   </div>
 </template>
 
